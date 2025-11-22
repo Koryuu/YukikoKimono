@@ -46,10 +46,6 @@
             position: relative;
         }
 
-        .images-side.expanded {
-            flex: 2;
-        }
-
         h1 {
             color: #667eea;
             margin-bottom: 10px;
@@ -121,12 +117,8 @@
 
         .images-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
-        }
-
-        .images-grid.expanded {
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         }
 
         .image-card {
@@ -152,13 +144,10 @@
 
         .image-card img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .image-card.expanded img {
             height: 300px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: #f8f9fa;
         }
 
         .image-label {
@@ -208,6 +197,53 @@
             font-weight: 600;
             margin: 0 3px;
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #667eea;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
@@ -217,10 +253,10 @@
             <h1>🌸 Yukiko's Festival Kimono</h1>
             <p class="subtitle">Interactive Commission Reference - Hover to highlight!</p>
 
-            <div class="section" data-images="img15"
+            <div class="section" data-images="img15,img15b"
                 style="background: linear-gradient(135deg, #fff9e6 0%, #ffe6f0 100%); border: 3px solid #667eea;">
                 <h2>⭐ Design Philosophy</h2>
-                <p><strong>What I love about Image 15 (foxgirl.png):</strong></p>
+                <p><strong>What I love about FoxGirl:</strong></p>
                 <ul>
                     <li><strong>Elegant without being overwhelming</strong> - The patterns are beautiful but readable
                     </li>
@@ -232,10 +268,20 @@
                     <strong>Our Goal:</strong> Capture this same elegance and refinement, BUT customized with Yukiko's
                     specific ice/snowflake theme and all the detailed requirements below.
                 </p>
-                <p>📸 Reference: <span class="ref-tag">FoxGirl</span></p>
+
+                <h3 style="margin-top: 20px;">Base Kimono Structure Reference:</h3>
+                <p><strong>FoxGirl</strong> is the best reference for the blank kimono shape - use this for the basic
+                    structure/silhouette before adding patterns.</p>
+
+                <h3 style="margin-top: 15px;">Pattern Inspiration:</h3>
+                <p>I love <strong>Fubuki2</strong> and the <strong>Acrylic Stand</strong> for their snowflake patterns!
+                    These show the perfect density and distribution of snowflakes.</p>
+
+                <p style="margin-top: 15px;">📸 References: <span class="ref-tag">FoxGirl, FoxGirl2, Fubuki2, Acrylic
+                        Stand</span></p>
             </div>
 
-            <div class="section" data-images="img2,img5,img7,img10,img13,img14,img15">
+            <div class="section" data-images="img15,img15b,img2,img7,img10,img13,img14">
                 <h2>Kimono Shape & Structure</h2>
                 <p><strong>Style:</strong> Traditional full-length furisode kimono</p>
 
@@ -246,21 +292,32 @@
                     </li>
                     <li><span class="checkmark">✓</span> <strong>Length:</strong> Floor-length, NOT trailing</li>
                 </ul>
-                <p>📸 References: <span class="ref-tag">RedDragon, AzurLane, Fubuki2, Ayaka2, Gozen, FoxGirl</span></p>
+                <p>📸 Main Reference: <span class="ref-tag">FoxGirl (base structure)</span></p>
+                <p>📸 Additional: <span class="ref-tag">FoxGirl2, RedDragon, Fubuki2, PinkKimono, Ayaka2, Gozen</span>
+                </p>
             </div>
 
-            <div class="section" data-images="img7,img15,acrylic">
+            <div class="section" data-images="img7,img15,img15b,acrylic">
                 <h2>Kimono Patterns</h2>
                 <p><strong>Pattern Coverage:</strong> Medium density - elegant and readable, NOT too dense</p>
-                <p style="color: #dc3545;">❌ <strong>TOO DENSE (avoid):</strong> Ayaka1</p>
+
+                <div class="warning-box">
+                    <p style="color: #856404; margin: 0;"><strong>⚠️ About Ayaka1:</strong> While the design itself is
+                        beautiful and I love the intricate details, it's TOO DENSE for what we want. There are too many
+                        different pattern elements competing for attention (multiple flower types, geometric shapes,
+                        swirls, etc.) layered on top of each other. We want elegance through simplicity - fewer pattern
+                        types but well-placed.</p>
+                </div>
 
                 <h3>Pattern Elements (in order of prominence):</h3>
                 <ol>
-                    <li><strong>SNOWFLAKES</strong> - MOST PROMINENT (like acrylic stand texture)</li>
+                    <li><strong>SNOWFLAKES</strong> - MOST PROMINENT (like Fubuki2 and Acrylic Stand - I love these!)
+                    </li>
                     <li><strong>PINK CHERRY BLOSSOMS</strong> - Secondary element</li>
                     <li><strong>ICY WIND SWIRLS</strong> - Tertiary element (NOT water waves)</li>
                 </ol>
-                <p>📸 Good Examples: <span class="ref-tag">Fubuki2, FoxGirl, Acrylic Stand</span></p>
+                <p>📸 Best Examples: <span class="ref-tag">Fubuki2 (snowflakes!), FoxGirl (density), Acrylic Stand
+                        (snowflakes!)</span></p>
             </div>
 
             <div class="section" data-images="acrylic,img3,img7,img4,img8">
@@ -363,7 +420,7 @@
                     Combine both!</p>
             </div>
 
-            <div class="section" data-images="img13">
+            <div class="section" data-images="img13,img15b">
                 <h2>Legwear</h2>
                 <ul>
                     <li><span class="checkmark">✓</span> <strong>Type:</strong> Decorative leggings (no shoes/socks -
@@ -374,10 +431,10 @@
                     <li><span class="checkmark">✓</span> <strong>Decoration:</strong> Simple pink rope/cord tied around
                         thigh</li>
                 </ul>
-                <p>📸 Reference: <span class="ref-tag">Ayaka2</span></p>
+                <p>📸 References: <span class="ref-tag">Ayaka2, FoxGirl2 (legwear style)</span></p>
             </div>
 
-            <div class="section" data-images="img12,img15">
+            <div class="section" data-images="img12,img15,img15b">
                 <h2>Pose</h2>
                 <ul>
                     <li><span class="checkmark">✓</span> <strong>Energy:</strong> Elegant and poised (formal festival
@@ -387,10 +444,8 @@
                     <li><span class="checkmark">✓</span> <strong>Hair:</strong> Windswept/flowing dramatically</li>
                 </ul>
                 <p><strong>Overall Feel:</strong> Refined, celebratory, graceful</p>
-                <p>📸 References: <span class="ref-tag">Pose, FoxGirl</span></p>
+                <p>📸 References: <span class="ref-tag">Pose, FoxGirl, FoxGirl2</span></p>
             </div>
-
-
 
             <div class="section" data-images="">
                 <h2>🎨 Important Notes</h2>
@@ -408,82 +463,105 @@
             <button class="close-btn" id="closeBtn">✕ Show All Images</button>
 
             <div class="images-grid" id="imagesGrid">
-                <div class="image-card" data-id="img2" data-sections="img2,img5,img7,img10,img13,img14,img15">
-                    <img src="RedDragon.jpg" alt="RedDragon">
+                <!-- Primary Reference -->
+                <div class="image-card" data-id="img15" data-sections="img15,img15b,img2,img7,img10,img13,img14">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/FoxGirl.png" alt="FoxGirl">
+                    <div class="image-label">FoxGirl ⭐ MAIN VIBE</div>
+                </div>
+
+                <div class="image-card" data-id="img15b" data-sections="img15,img15b,img2,img7,img10,img13,img14">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/FoxGirl2.jpg" alt="FoxGirl2">
+                    <div class="image-label">FoxGirl2 (same character)</div>
+                </div>
+
+                <!-- Pattern References -->
+                <div class="image-card" data-id="acrylic" data-sections="img7,img15,img15b,acrylic">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/acrylicstand.jpg"
+                        alt="Acrylic Stand">
+                    <div class="image-label">Acrylic Stand (snowflakes!)</div>
+                </div>
+
+                <div class="image-card" data-id="img7" data-sections="img15,img15b,img2,img7,img10,img13,img14">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Fubuki2.jpg" alt="Fubuki2">
+                    <div class="image-label">Fubuki2 (snowflakes!)</div>
+                </div>
+
+                <!-- Shape References -->
+                <div class="image-card" data-id="img2" data-sections="img15,img15b,img2,img7,img10,img13,img14">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/RedDragon.jpg" alt="RedDragon">
                     <div class="image-label">RedDragon</div>
                 </div>
 
-                <div class="image-card" data-id="img3" data-sections="acrylic,img3,img7,img4,img8">
-                    <img src="BlueKimono1.png" alt="BlueKimono1">
-                    <div class="image-label">BlueKimono1</div>
-                </div>
-
                 <div class="image-card" data-id="img4" data-sections="acrylic,img3,img7,img4,img8">
-                    <img src="Fubuki.jpg" alt="Fubuki">
-                    <div class="image-label">Fubuki</div>
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Fubuki.jpg" alt="Fubuki">
+                    <div class="image-label">Fubuki (neckline ref)</div>
                 </div>
 
-                <div class="image-card" data-id="img5" data-sections="img2,img5,img7,img10,img13,img14,img15">
-                    <img src="AzurLane.jpg" alt="AzurLane">
-                    <div class="image-label">AzurLane</div>
-                </div>
-
-                <div class="image-card" data-id="img6" data-sections="img5,img6,img10">
-                    <img src="Kiyori.jpg" alt="Kiyori">
-                    <div class="image-label">Kiyori</div>
-                </div>
-
-                <div class="image-card" data-id="img7" data-sections="img2,img5,img7,img10,img13,img14,img15">
-                    <img src="Fubuki2.jpg" alt="Fubuki2">
-                    <div class="image-label">Fubuki2</div>
-                </div>
-
-                <div class="image-card" data-id="img8" data-sections="acrylic,img3,img7,img4,img8">
-                    <img src="Ayaka1.jpg" alt="Ayaka1">
-                    <div class="image-label">Ayaka1<br>(Too Dense - Avoid)</div>
-                </div>
-
-                <div class="image-card" data-id="img9" data-sections="img9,img11">
-                    <img src="FlowerFan.jpg" alt="FlowerFan">
-                    <div class="image-label">FlowerFan</div>
-                </div>
-
-                <div class="image-card" data-id="img10" data-sections="img2,img5,img7,img10,img13,img14,img15">
-                    <img src="PinkKimono.jpg" alt="PinkKimono">
+                <div class="image-card" data-id="img10" data-sections="img15,img15b,img2,img7,img10,img13,img14">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/PinkKimono.jpg"
+                        alt="PinkKimono">
                     <div class="image-label">PinkKimono</div>
                 </div>
 
-                <div class="image-card" data-id="img11" data-sections="img9,img11">
-                    <img src="FlowerFan.jpg" alt="FlowerFan2">
-                    <div class="image-label">FlowerFan2</div>
-                </div>
-
-                <div class="image-card" data-id="img12" data-sections="img12,img15">
-                    <img src="Pose.png" alt="Pose">
-                    <div class="image-label">Pose</div>
-                </div>
-
-                <div class="image-card" data-id="img13" data-sections="img2,img5,img7,img10,img13,img14,img15">
-                    <img src="Ayaka2.jpg" alt="Ayaka2">
-                    <div class="image-label">Ayaka2</div>
-                </div>
-
-                <div class="image-card" data-id="img14" data-sections="img2,img5,img7,img10,img13,img14,img15">
-                    <img src="Gozen.png" alt="Gozen">
+                <div class="image-card" data-id="img14" data-sections="img15,img15b,img2,img7,img10,img13,img14">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Gozen.png" alt="Gozen">
                     <div class="image-label">Gozen</div>
                 </div>
 
-                <div class="image-card" data-id="img15" data-sections="img2,img5,img7,img10,img13,img14,img15">
-                    <img src="FoxGirl.png" alt="FoxGirl">
-                    <div class="image-label">FoxGirl ⭐</div>
+                <!-- Color Options -->
+                <div class="image-card" data-id="img3" data-sections="acrylic,img3,img7,img4,img8">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/BlueKimono1.png"
+                        alt="BlueKimono1">
+                    <div class="image-label">BlueKimono1</div>
                 </div>
 
-                <div class="image-card" data-id="acrylic" data-sections="img7,img15,acrylic">
-                    <img src="acrylicstand.jpg" alt="Acrylic Stand">
-                    <div class="image-label">Acrylic Stand</div>
+                <div class="image-card" data-id="img8" data-sections="acrylic,img3,img7,img4,img8">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Ayaka1.jpg" alt="Ayaka1">
+                    <div class="image-label">Ayaka1 (Too Dense)</div>
+                </div>
+
+                <!-- Hair Ornaments -->
+                <div class="image-card" data-id="img5" data-sections="img5,img6,img10">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/AzurLane.jpg" alt="AzurLane">
+                    <div class="image-label">AzurLane (hair amount)</div>
+                </div>
+
+                <div class="image-card" data-id="img6" data-sections="img5,img6,img10">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Kiyori.jpg" alt="Kiyori">
+                    <div class="image-label">Kiyori</div>
+                </div>
+
+                <!-- Fans -->
+                <div class="image-card" data-id="img9" data-sections="img9,img11">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/FlowerFan.jpg" alt="FlowerFan">
+                    <div class="image-label">FlowerFan</div>
+                </div>
+
+                <div class="image-card" data-id="img11" data-sections="img9,img11">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/FlowerFan2.jpg"
+                        alt="FlowerFan2">
+                    <div class="image-label">FlowerFan2</div>
+                </div>
+
+                <!-- Legwear -->
+                <div class="image-card" data-id="img13" data-sections="img13,img15b">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Ayaka2.jpg" alt="Ayaka2">
+                    <div class="image-label">Ayaka2 (legwear)</div>
+                </div>
+
+                <!-- Pose -->
+                <div class="image-card" data-id="img12" data-sections="img12,img15,img15b">
+                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Pose.png" alt="Pose">
+                    <div class="image-label">Pose</div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <img class="modal-content" id="modalImage">
     </div>
 
     <script>
@@ -492,6 +570,9 @@
         const closeBtn = document.getElementById('closeBtn');
         const imagesSide = document.getElementById('imagesSide');
         const imagesGrid = document.getElementById('imagesGrid');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
         let isFiltered = false;
         let activeSection = null;
 
@@ -529,14 +610,11 @@
                 section.classList.add('highlighted');
 
                 isFiltered = true;
-                imagesSide.classList.add('expanded');
-                imagesGrid.classList.add('expanded');
                 closeBtn.classList.add('visible');
 
                 // Reset all images first
                 imageCards.forEach(card => {
                     card.style.display = 'none';
-                    card.classList.remove('expanded');
                     card.classList.remove('highlighted');
                 });
 
@@ -545,7 +623,6 @@
                     const cardId = card.getAttribute('data-id');
                     if (imageIds.includes(cardId)) {
                         card.style.display = 'block';
-                        card.classList.add('expanded');
                     }
                 });
             });
@@ -570,19 +647,34 @@
                 sections.forEach(section => section.classList.remove('highlighted'));
                 card.classList.remove('highlighted');
             });
+
+            // Click on image -> open modal
+            card.addEventListener('click', (e) => {
+                const img = card.querySelector('img');
+                modal.classList.add('active');
+                modalImg.src = img.src;
+            });
+        });
+
+        // Close modal
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
         });
 
         // Close button -> show all images
         closeBtn.addEventListener('click', () => {
             isFiltered = false;
             activeSection = null;
-            imagesSide.classList.remove('expanded');
-            imagesGrid.classList.remove('expanded');
             closeBtn.classList.remove('visible');
 
             imageCards.forEach(card => {
                 card.style.display = 'block';
-                card.classList.remove('expanded');
                 card.classList.remove('highlighted');
             });
 
