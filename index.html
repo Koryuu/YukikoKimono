@@ -31,10 +31,25 @@
         }
 
         .specs-side {
-            flex: 1;
+            flex: 0 0 35%;
             padding: 40px;
             overflow-y: auto;
             max-height: 90vh;
+            transition: flex 0.3s ease;
+        }
+
+        .specs-side.image-focused {
+            flex: 0 0 70%;
+        }
+
+        .sections-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .section.full-width {
+            grid-column: 1 / -1;
         }
 
         .images-side {
@@ -44,6 +59,11 @@
             overflow-y: auto;
             max-height: 90vh;
             position: relative;
+            transition: flex 0.3s ease;
+        }
+
+        .images-side.image-focused {
+            flex: 0 0 30%;
         }
 
         h1 {
@@ -77,6 +97,15 @@
             background: #e8f0ff;
             border-color: #667eea;
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .section.hidden {
+            display: none;
+        }
+
+        .image-card.selected-main {
+            border: 4px solid #28a745;
+            box-shadow: 0 0 25px rgba(40, 167, 69, 0.6);
         }
 
         .section h2 {
@@ -117,8 +146,22 @@
 
         .images-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .images-grid.filtered {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .images-grid.filtered-two {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .images-grid.filtered-one {
+            grid-template-columns: 1fr;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .image-card {
@@ -144,10 +187,14 @@
 
         .image-card img {
             width: 100%;
-            height: 300px;
+            height: 220px;
             object-fit: contain;
             border-radius: 8px;
             background: #f8f9fa;
+        }
+
+        .image-card.enlarged img {
+            height: 350px;
         }
 
         .image-label {
@@ -250,12 +297,12 @@
 <body>
     <div class="container">
         <div class="specs-side">
-            <h1>🌸 Yukiko's Festival Kimono</h1>
-            <p class="subtitle">Interactive Commission Reference - Hover to highlight!</p>
+            <h1>Yukiko's Festival Kimono</h1>
+            <p class="subtitle">I went from an word doc, to excel, to powerpoint, to this lol.</p>
 
             <div class="section" data-images="img15,img15b"
                 style="background: linear-gradient(135deg, #fff9e6 0%, #ffe6f0 100%); border: 3px solid #667eea;">
-                <h2>⭐ Design Philosophy</h2>
+                <h2>Design Philosophy</h2>
                 <p><strong>What I love about FoxGirl:</strong></p>
                 <ul>
                     <li><strong>Elegant without being overwhelming</strong> - The patterns are beautiful but readable
@@ -265,8 +312,7 @@
                     <li><strong>The flowing windswept hair</strong> - Dynamic yet elegant</li>
                 </ul>
                 <p style="margin-top: 15px; padding: 10px; background: white; border-radius: 8px;">
-                    <strong>Our Goal:</strong> Capture this same elegance and refinement, BUT customized with Yukiko's
-                    specific ice/snowflake theme and all the detailed requirements below.
+                    <strong>Goal:</strong> Capture this same elegance and refinement, but with Yuki's theme.
                 </p>
 
                 <h3 style="margin-top: 20px;">Base Kimono Structure Reference:</h3>
@@ -277,24 +323,24 @@
                 <p>I love <strong>Fubuki2</strong> and the <strong>Acrylic Stand</strong> for their snowflake patterns!
                     These show the perfect density and distribution of snowflakes.</p>
 
-                <p style="margin-top: 15px;">📸 References: <span class="ref-tag">FoxGirl, FoxGirl2, Fubuki2, Acrylic
+                <p style="margin-top: 15px;">References: <span class="ref-tag">FoxGirl, FoxGirl2, Fubuki2, Acrylic
                         Stand</span></p>
             </div>
 
-            <div class="section" data-images="img15,img15b,img2,img7,img10,img13,img14">
+            <div class="section" data-images="img15,img15b,img2,img7,img14">
                 <h2>Kimono Shape & Structure</h2>
                 <p><strong>Style:</strong> Traditional full-length furisode kimono</p>
 
                 <h3>Key Features:</h3>
                 <ul>
-                    <li><span class="checkmark">✓</span> <strong>Long furisode sleeves</strong> → Like FoxGirl</li>
-                    <li><span class="checkmark">✓</span> <strong>Neckline:</strong> More open/lower cut → Like Fubuki
-                    </li>
-                    <li><span class="checkmark">✓</span> <strong>Length:</strong> Floor-length, NOT trailing</li>
+                    <li> <strong>Long furisode sleeves</strong> → Like FoxGirl</li>
+                    <li> <strong>Neckline:</strong> More open/lower cut, show the booba but not as much as her battle
+                        outfit</li>
+                    <li> <strong>Length:</strong> Floor-length, NOT trailing</li>
                 </ul>
-                <p>📸 Main Reference: <span class="ref-tag">FoxGirl (base structure)</span></p>
-                <p>📸 Additional: <span class="ref-tag">FoxGirl2, RedDragon, Fubuki2, PinkKimono, Ayaka2, Gozen</span>
-                </p>
+                <p>Main Reference: <span class="ref-tag">FoxGirl (base structure)</span></p>
+                <p>Additional: <span class="ref-tag">FoxGirl2, RedDragon (anthro wearing kimono), Fubuki2, PinkKimono
+                        (back ribbon)</span></p>
             </div>
 
             <div class="section" data-images="img7,img15,img15b,acrylic">
@@ -310,19 +356,18 @@
                 </div>
 
                 <h3>Pattern Elements (in order of prominence):</h3>
-                <ol>
+                <ul>
                     <li><strong>SNOWFLAKES</strong> - MOST PROMINENT (like Fubuki2 and Acrylic Stand - I love these!)
                     </li>
                     <li><strong>PINK CHERRY BLOSSOMS</strong> - Secondary element</li>
                     <li><strong>ICY WIND SWIRLS</strong> - Tertiary element (NOT water waves)</li>
-                </ol>
-                <p>📸 Best Examples: <span class="ref-tag">Fubuki2 (snowflakes!), FoxGirl (density), Acrylic Stand
+                </ul>
+                <p>Best Examples: <span class="ref-tag">Fubuki2 (snowflakes!), FoxGirl (density), Acrylic Stand
                         (snowflakes!)</span></p>
             </div>
 
-            <div class="section" data-images="acrylic,img3,img7,img4,img8">
+            <div class="section" data-images="acrylic,img7,img4,img8">
                 <h2>Kimono Color Options</h2>
-                <p><em>Artist can choose which works best:</em></p>
 
                 <div class="options">
                     <h3>Option A: Icy Blue & White</h3>
@@ -330,7 +375,7 @@
                         <li>Stays close to battle outfit aesthetic</li>
                         <li>Light icy blue and white base</li>
                     </ul>
-                    <p>📸 Reference: <span class="ref-tag">Acrylic Stand, BlueKimono1, Fubuki2</span></p>
+                    <p>Reference: <span class="ref-tag">Acrylic Stand, Fubuki2</span></p>
                 </div>
 
                 <div class="options">
@@ -339,13 +384,16 @@
                         <li>Icy blue transitioning to purple</li>
                         <li>More formal/special occasion feel</li>
                     </ul>
-                    <p>📸 Reference: <span class="ref-tag">Fubuki, Ayaka1</span></p>
+                    <p>Reference: <span class="ref-tag">Fubuki (same artist as Ayaka1), Ayaka1</span></p>
+                    <p style="margin-top: 10px; font-size: 0.95em; color: #666;">
+                        <em>Note: Fubuki and Ayaka1 are by the same artist - I love their design aesthetic! Both show
+                            beautiful blue-to-purple gradients, just with different pattern densities.</em>
+                    </p>
                 </div>
             </div>
 
             <div class="section" data-images="">
                 <h2>Obi (Belt) Options</h2>
-                <p><em>Artist can choose which works best:</em></p>
 
                 <div class="options">
                     <h3>Option A: Gold/Warm Tone</h3>
@@ -363,34 +411,32 @@
                     </ul>
                 </div>
 
-                <p><strong>NO family crest on obi</strong> (crest goes on hair ornament)</p>
+                <p><strong>Debatable</strong>: Family Crest in this Area</p>
             </div>
 
             <div class="section" data-images="">
                 <h2>Obi Accessories</h2>
-
+                <p>Color: Pink (Matches main outfit)</p>
                 <h3>Front Cord (Obijime):</h3>
                 <ul>
-                    <li><span class="checkmark">✓</span> Simple twisted/braided cord across front of obi</li>
-                    <li><span class="checkmark">✓</span> Color: <strong>PINK</strong></li>
+                    <li> Simple twisted/braided cord across front of obi</li>
                 </ul>
 
                 <h3>Back Bow (Musubi):</h3>
                 <ul>
-                    <li><span class="checkmark">✓</span> Traditional large bow (taiko or butterfly style)</li>
-                    <li><span class="checkmark">✓</span> Color: <strong>PINK</strong></li>
-                    <li><span class="checkmark">✓</span> Tied at back of obi</li>
+                    <li> Traditional large bow (taiko or butterfly style)</li>
+                    <li> Tied at back of obi</li>
                 </ul>
             </div>
 
-            <div class="section" data-images="img5,img6,img10">
+            <div class="section" data-images="img6,img10">
                 <h2>Hair Ornament</h2>
 
                 <h3>Structure:</h3>
                 <ul>
-                    <li><span class="checkmark">✓</span> Multiple flowers with decorative elements (like AzurLane)</li>
-                    <li><span class="checkmark">✓</span> Flower Color: White/purple</li>
-                    <li><span class="checkmark">✓</span> Hair Style: Completely down, loose and flowing (NO ponytail)
+                    <li> Multiple flowers with decorative elements</li>
+                    <li> Flower Color: White/purple (Same one on the ref sheet)</li>
+                    <li> Hair Style: Completely down, loose and flowing (No ponytail)
                     </li>
                 </ul>
 
@@ -401,14 +447,14 @@
                     <li>Snowflake crest on decorative disc behind/above flowers</li>
                 </ul>
 
-                <p>📸 References: <span class="ref-tag">AzurLane (amount), Kiyori, PinkKimono (style)</span></p>
+                <p>References: <span class="ref-tag">Kiyori, PinkKimono (ornament style)</span></p>
             </div>
 
             <div class="section" data-images="img9,img11">
                 <h2>Fan Design</h2>
                 <ul>
-                    <li><span class="checkmark">✓</span> <strong>Base Color:</strong> Navy blue (dark)</li>
-                    <li><span class="checkmark">✓</span> <strong>Pattern:</strong> COMBINATION of:
+                    <li> <strong>Base Color:</strong> Navy blue (dark)</li>
+                    <li> <strong>Pattern:</strong> COMBINATION of:
                         <ul>
                             <li>Ice swirls (white flowing patterns)</li>
                             <li>Cherry blossoms (pink)</li>
@@ -416,43 +462,45 @@
                         </ul>
                     </li>
                 </ul>
-                <p>📸 References: <span class="ref-tag">FlowerFan (cherry blossom), FlowerFan2 (ice swirl)</span> -
+                <p>References: <span class="ref-tag">FlowerFan (cherry blossom), FlowerFan2 (ice swirl)</span> -
                     Combine both!</p>
             </div>
 
-            <div class="section" data-images="img13,img15b">
+            <div class="section" data-images="img15,img15b">
                 <h2>Legwear</h2>
                 <ul>
-                    <li><span class="checkmark">✓</span> <strong>Type:</strong> Decorative leggings (no shoes/socks -
+                    <li> <strong>Type:</strong> Decorative leggings (no shoes/socks -
                         she's anthro dragon)</li>
-                    <li><span class="checkmark">✓</span> <strong>Pattern:</strong> White-to-blue gradient (subtle)</li>
-                    <li><span class="checkmark">✓</span> <strong>Top Edge:</strong> Simple rounded edge (NOT spiky like
+                    <li> <strong>Pattern:</strong> White-to-blue gradient (subtle)</li>
+                    <li> <strong>Top Edge:</strong> Simple rounded edge (NOT spiky like
                         battle outfit)</li>
-                    <li><span class="checkmark">✓</span> <strong>Decoration:</strong> Simple pink rope/cord tied around
+                    <li> <strong>Decoration:</strong> Simple pink rope/cord tied around
                         thigh</li>
                 </ul>
-                <p>📸 References: <span class="ref-tag">Ayaka2, FoxGirl2 (legwear style)</span></p>
+                <p>References: <span class="ref-tag">FoxGirl, FoxGirl2</span> - Both show the same legwear style</p>
             </div>
 
             <div class="section" data-images="img12,img15,img15b">
                 <h2>Pose</h2>
                 <ul>
-                    <li><span class="checkmark">✓</span> <strong>Energy:</strong> Elegant and poised (formal festival
+                    <li> <strong>Energy:</strong> Elegant and poised (formal festival
                         feeling)</li>
-                    <li><span class="checkmark">✓</span> <strong>Fan:</strong> Holding it OPEN (to display the pattern)
+                    <li> <strong>Fan:</strong> Holding it OPEN (to display the pattern)
                     </li>
-                    <li><span class="checkmark">✓</span> <strong>Hair:</strong> Windswept/flowing dramatically</li>
+                    <li> <strong>Hair:</strong> Windswept/flowing dramatically</li>
                 </ul>
                 <p><strong>Overall Feel:</strong> Refined, celebratory, graceful</p>
-                <p>📸 References: <span class="ref-tag">Pose, FoxGirl, FoxGirl2</span></p>
+                <p>References: <span class="ref-tag">Pose, FoxGirl, FoxGirl2</span></p>
+                <p><strong>Note:</strong> In the original Powerpoint, there were two custom poses, a battle pose (main
+                    outfit) and this pose. I'm not sure if we're doing the poses since we didn't do the battle one but
+                    something to talk about later.</p>
             </div>
 
             <div class="section" data-images="">
-                <h2>🎨 Important Notes</h2>
+                <h2>Important Notes</h2>
                 <ul>
-                    <li>This is FORMAL FESTIVAL wear - different from battle outfit</li>
                     <li>Pink accents throughout (cherry blossoms, rope, obi cord, back bow)</li>
-                    <li>Family crest on hair ornament (not on obi like battle outfit)</li>
+                    <li>Family crest on hair ornament or obi</li>
                     <li>Keep it elegant - complexity in patterns, not excessive accessories</li>
                     <li>She's representing her family but in a celebratory way</li>
                 </ul>
@@ -464,94 +512,72 @@
 
             <div class="images-grid" id="imagesGrid">
                 <!-- Primary Reference -->
-                <div class="image-card" data-id="img15" data-sections="img15,img15b,img2,img7,img10,img13,img14">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/FoxGirl.png" alt="FoxGirl">
-                    <div class="image-label">FoxGirl ⭐ MAIN VIBE</div>
+                <div class="image-card" data-id="img15" data-sections="img15,img15b,img2,img7,img13,img14">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/FoxGirl.png" alt="FoxGirl">
+                    <div class="image-label">FoxGirl</div>
                 </div>
 
-                <div class="image-card" data-id="img15b" data-sections="img15,img15b,img2,img7,img10,img13,img14">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/FoxGirl2.jpg" alt="FoxGirl2">
+                <div class="image-card" data-id="img15b" data-sections="img15,img15b,img2,img7,img13,img14">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/foxgirl2.jpg" alt="FoxGirl2">
                     <div class="image-label">FoxGirl2 (same character)</div>
                 </div>
 
                 <!-- Pattern References -->
                 <div class="image-card" data-id="acrylic" data-sections="img7,img15,img15b,acrylic">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/acrylicstand.jpg"
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/acrylicstand.jpg"
                         alt="Acrylic Stand">
                     <div class="image-label">Acrylic Stand (snowflakes!)</div>
                 </div>
 
-                <div class="image-card" data-id="img7" data-sections="img15,img15b,img2,img7,img10,img13,img14">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Fubuki2.jpg" alt="Fubuki2">
+                <div class="image-card" data-id="img7" data-sections="img15,img15b,img2,img7,img13,img14">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/Fubuki2.jpg" alt="Fubuki2">
                     <div class="image-label">Fubuki2 (snowflakes!)</div>
                 </div>
 
                 <!-- Shape References -->
-                <div class="image-card" data-id="img2" data-sections="img15,img15b,img2,img7,img10,img13,img14">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/RedDragon.jpg" alt="RedDragon">
-                    <div class="image-label">RedDragon</div>
+                <div class="image-card" data-id="img2" data-sections="img15,img15b,img2,img7,img13,img14">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/RedDragon.jpg" alt="RedDragon">
+                    <div class="image-label">RedDragon (anthro ref)</div>
                 </div>
 
-                <div class="image-card" data-id="img4" data-sections="acrylic,img3,img7,img4,img8">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Fubuki.jpg" alt="Fubuki">
-                    <div class="image-label">Fubuki (neckline ref)</div>
+                <div class="image-card" data-id="img4" data-sections="acrylic,img7,img4,img8">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/Fubuki.jpg" alt="Fubuki">
+                    <div class="image-label">Fubuki (gradient color)</div>
                 </div>
 
-                <div class="image-card" data-id="img10" data-sections="img15,img15b,img2,img7,img10,img13,img14">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/PinkKimono.jpg"
+                <div class="image-card" data-id="img10" data-sections="img15,img15b,img2,img7,img14">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/PinkKimono.jpg"
                         alt="PinkKimono">
-                    <div class="image-label">PinkKimono</div>
-                </div>
-
-                <div class="image-card" data-id="img14" data-sections="img15,img15b,img2,img7,img10,img13,img14">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Gozen.png" alt="Gozen">
-                    <div class="image-label">Gozen</div>
+                    <div class="image-label">PinkKimono (back ribbon)</div>
                 </div>
 
                 <!-- Color Options -->
-                <div class="image-card" data-id="img3" data-sections="acrylic,img3,img7,img4,img8">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/BlueKimono1.png"
-                        alt="BlueKimono1">
-                    <div class="image-label">BlueKimono1</div>
-                </div>
-
-                <div class="image-card" data-id="img8" data-sections="acrylic,img3,img7,img4,img8">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Ayaka1.jpg" alt="Ayaka1">
+                <div class="image-card" data-id="img8" data-sections="acrylic,img7,img4,img8">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/Ayaka1.jpg" alt="Ayaka1">
                     <div class="image-label">Ayaka1 (Too Dense)</div>
                 </div>
 
                 <!-- Hair Ornaments -->
-                <div class="image-card" data-id="img5" data-sections="img5,img6,img10">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/AzurLane.jpg" alt="AzurLane">
-                    <div class="image-label">AzurLane (hair amount)</div>
-                </div>
-
-                <div class="image-card" data-id="img6" data-sections="img5,img6,img10">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Kiyori.jpg" alt="Kiyori">
-                    <div class="image-label">Kiyori</div>
+                <div class="image-card" data-id="img6" data-sections="img6,img10">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/Kiyori.jpg" alt="Kiyori">
+                    <div class="image-label">Kiyori (hair ornament)</div>
                 </div>
 
                 <!-- Fans -->
                 <div class="image-card" data-id="img9" data-sections="img9,img11">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/FlowerFan.jpg" alt="FlowerFan">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/FlowerFan.jpg" alt="FlowerFan">
                     <div class="image-label">FlowerFan</div>
                 </div>
 
                 <div class="image-card" data-id="img11" data-sections="img9,img11">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/FlowerFan2.jpg"
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/FlowerFan2.jpg"
                         alt="FlowerFan2">
                     <div class="image-label">FlowerFan2</div>
                 </div>
 
-                <!-- Legwear -->
-                <div class="image-card" data-id="img13" data-sections="img13,img15b">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Ayaka2.jpg" alt="Ayaka2">
-                    <div class="image-label">Ayaka2 (legwear)</div>
-                </div>
-
                 <!-- Pose -->
                 <div class="image-card" data-id="img12" data-sections="img12,img15,img15b">
-                    <img src="https://raw.githubusercontent.com/koryuu/YukikoKimono/main/Pose.png" alt="Pose">
+                    <img src="https://raw.githubusercontent.com/Koryuu/YukikoKimono/main/Pose.png" alt="Pose">
                     <div class="image-label">Pose</div>
                 </div>
             </div>
@@ -569,17 +595,20 @@
         const imageCards = document.querySelectorAll('.image-card');
         const closeBtn = document.getElementById('closeBtn');
         const imagesSide = document.getElementById('imagesSide');
+        const specsSide = document.querySelector('.specs-side');
         const imagesGrid = document.getElementById('imagesGrid');
         const modal = document.getElementById('imageModal');
         const modalImg = document.getElementById('modalImage');
         const modalClose = document.getElementById('modalClose');
         let isFiltered = false;
         let activeSection = null;
+        let imageFocusMode = false;
+        let activeImageCard = null;
 
         // Hover on section -> highlight images
         sections.forEach(section => {
             section.addEventListener('mouseenter', () => {
-                if (isFiltered) return;
+                if (isFiltered || imageFocusMode) return;
                 const imageIds = section.getAttribute('data-images').split(',').filter(id => id);
                 imageCards.forEach(card => {
                     if (imageIds.includes(card.getAttribute('data-id'))) {
@@ -590,7 +619,7 @@
             });
 
             section.addEventListener('mouseleave', () => {
-                if (isFiltered) return;
+                if (isFiltered || imageFocusMode) return;
                 imageCards.forEach(card => card.classList.remove('highlighted'));
                 section.classList.remove('highlighted');
             });
@@ -599,6 +628,11 @@
             section.addEventListener('click', () => {
                 const imageIds = section.getAttribute('data-images').split(',').filter(id => id);
                 if (imageIds.length === 0) return;
+
+                // If in image focus mode, exit it first
+                if (imageFocusMode) {
+                    exitImageFocusMode();
+                }
 
                 // Remove highlight from previous active section
                 if (activeSection && activeSection !== section) {
@@ -616,13 +650,34 @@
                 imageCards.forEach(card => {
                     card.style.display = 'none';
                     card.classList.remove('highlighted');
+                    card.classList.remove('enlarged');
                 });
 
-                // Show only relevant images
+                // Count visible images
+                let visibleCount = 0;
+                imageCards.forEach(card => {
+                    const cardId = card.getAttribute('data-id');
+                    if (imageIds.includes(cardId)) {
+                        visibleCount++;
+                    }
+                });
+
+                // Apply appropriate grid class based on count
+                imagesGrid.classList.remove('filtered', 'filtered-two', 'filtered-one');
+                if (visibleCount === 1) {
+                    imagesGrid.classList.add('filtered-one');
+                } else if (visibleCount === 2) {
+                    imagesGrid.classList.add('filtered-two');
+                } else {
+                    imagesGrid.classList.add('filtered');
+                }
+
+                // Show only relevant images and enlarge them
                 imageCards.forEach(card => {
                     const cardId = card.getAttribute('data-id');
                     if (imageIds.includes(cardId)) {
                         card.style.display = 'block';
+                        card.classList.add('enlarged');
                     }
                 });
             });
@@ -631,7 +686,7 @@
         // Hover on image -> highlight sections
         imageCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
-                if (isFiltered) return;
+                if (isFiltered || imageFocusMode) return;
                 const sectionIds = card.getAttribute('data-sections').split(',');
                 sections.forEach(section => {
                     const sectionImages = section.getAttribute('data-images').split(',');
@@ -643,18 +698,97 @@
             });
 
             card.addEventListener('mouseleave', () => {
-                if (isFiltered) return;
+                if (isFiltered || imageFocusMode) return;
                 sections.forEach(section => section.classList.remove('highlighted'));
                 card.classList.remove('highlighted');
             });
 
-            // Click on image -> open modal
+            // Click on image
             card.addEventListener('click', (e) => {
-                const img = card.querySelector('img');
-                modal.classList.add('active');
-                modalImg.src = img.src;
+                // If already in filtered/section mode, open modal instead
+                if (isFiltered) {
+                    const img = card.querySelector('img');
+                    modal.classList.add('active');
+                    modalImg.src = img.src;
+                    return;
+                }
+
+                // If in image focus mode and clicking the same image, open modal
+                if (imageFocusMode && activeImageCard === card) {
+                    const img = card.querySelector('img');
+                    modal.classList.add('active');
+                    modalImg.src = img.src;
+                    return;
+                }
+
+                // If clicking a different image while in image focus mode, switch to new image
+                if (imageFocusMode && activeImageCard !== card) {
+                    exitImageFocusMode();
+                    enterImageFocusMode(card);
+                    return;
+                }
+
+                // Enter image focus mode
+                enterImageFocusMode(card);
             });
         });
+
+        function enterImageFocusMode(card) {
+            imageFocusMode = true;
+            activeImageCard = card;
+
+            // Change column layout
+            specsSide.classList.add('image-focused');
+            imagesSide.classList.add('image-focused');
+
+            // Get sections that reference this image
+            const cardId = card.getAttribute('data-id');
+            const relevantSectionIds = card.getAttribute('data-sections').split(',');
+
+            // Hide sections that don't reference this image
+            sections.forEach(section => {
+                const sectionImages = section.getAttribute('data-images').split(',');
+                if (!sectionImages.includes(cardId)) {
+                    section.classList.add('hidden');
+                } else {
+                    section.classList.add('highlighted');
+                }
+            });
+
+            // Highlight the selected image card
+            card.classList.add('selected-main');
+
+            // Show close button
+            closeBtn.classList.add('visible');
+            closeBtn.textContent = '✕ Show All Sections';
+        }
+
+        function exitImageFocusMode() {
+            imageFocusMode = false;
+
+            // Reset column layout
+            specsSide.classList.remove('image-focused');
+            imagesSide.classList.remove('image-focused');
+
+            // Show all sections and remove highlights
+            sections.forEach(section => {
+                section.classList.remove('hidden');
+                section.classList.remove('highlighted');
+            });
+
+            // Remove image selection and highlights from all images
+            imageCards.forEach(card => {
+                card.classList.remove('selected-main');
+                card.classList.remove('highlighted');
+            });
+
+            if (activeImageCard) {
+                activeImageCard = null;
+            }
+
+            // Update close button
+            closeBtn.textContent = '✕ Show All Images';
+        }
 
         // Close modal
         modalClose.addEventListener('click', () => {
@@ -667,18 +801,31 @@
             }
         });
 
-        // Close button -> show all images
+        // Close button -> show all images/sections
         closeBtn.addEventListener('click', () => {
+            if (imageFocusMode) {
+                exitImageFocusMode();
+                closeBtn.classList.remove('visible');
+                return;
+            }
+
             isFiltered = false;
             activeSection = null;
             closeBtn.classList.remove('visible');
 
+            imagesGrid.classList.remove('filtered', 'filtered-two', 'filtered-one');
+
             imageCards.forEach(card => {
                 card.style.display = 'block';
                 card.classList.remove('highlighted');
+                card.classList.remove('enlarged');
+                card.classList.remove('selected-main');
             });
 
-            sections.forEach(section => section.classList.remove('highlighted'));
+            sections.forEach(section => {
+                section.classList.remove('highlighted');
+                section.classList.remove('hidden');
+            });
         });
     </script>
 </body>
